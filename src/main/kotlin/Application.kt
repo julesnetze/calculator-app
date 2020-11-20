@@ -8,19 +8,10 @@ class Application {
     private val router = { _: Request ->
         Response(OK)
     }
-
-    private val server = router.asServer(SunHttp(9000))
-
-    fun start() {
-        server.start()
-    }
-
-    fun stop() {
-        server.stop()
-    }
+    val server = router.asServer(SunHttp(9000))
 }
 
-val app = Application()
+val app = Application().server
 fun main() {
     app.start()
 }
