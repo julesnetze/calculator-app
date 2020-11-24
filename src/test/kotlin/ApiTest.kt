@@ -9,13 +9,14 @@ import org.junit.jupiter.api.Test
 class ApiTest {
     @Test
     fun `server should be up`() {
-        main()
+        val app = Application()
+        app.start()
         val client = ApacheClient()
 
         val request = Request(GET, "http://localhost:9000")
 
         val response: Response = client(request)
         assertEquals(OK, response.status)
-        stop()
+        app.stop()
     }
 }
