@@ -7,13 +7,16 @@ import org.http4k.core.Status.Companion.OK
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ApiTest {
 
-    val app = Application()
-    val client = ApacheClient()
+    private lateinit var app: Application
+    lateinit var client: HttpHandler
 
-    @BeforeEach
+    @BeforeAll
     fun setUp() {
+        app = Application()
+        client = ApacheClient()
         app.start()
     }
 
@@ -33,7 +36,7 @@ class ApiTest {
         assertEquals("5", response.body.toString())
     }
 
-    @AfterEach
+    @AfterAll
     fun tearDown() {
         app.stop()
     }
