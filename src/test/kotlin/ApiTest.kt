@@ -30,10 +30,32 @@ class ApiTest {
 
     @Test
     fun `addition of 2 and 3 should return 5`() {
-        val request = Request(GET, "http://localhost:9000/addition?first=2&second=3")
+        val request = Request(GET, "http://localhost:9000/addition")
+            .query("first", "2")
+            .query("second", "3")
 
         val response: Response = client(request)
         assertEquals("5", response.body.toString())
+    }
+
+    @Test
+    fun `subtraction of 3 minus 2 should return 1`() {
+        val request = Request(GET, "http://localhost:9000/subtraction")
+            .query("first", "3")
+            .query("second", "2")
+
+        val response = client(request)
+        assertEquals("1", response.body.toString())
+    }
+
+    @Test
+    fun `multiplication of 3 times 2 should return 6`() {
+        val request = Request(GET,"http://localhost:9000/multiplication")
+            .query("first", "3")
+            .query("second", "2")
+
+        val response = client(request)
+        assertEquals("6", response.body.toString())
     }
 
     @AfterAll

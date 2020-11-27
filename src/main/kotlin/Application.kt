@@ -13,9 +13,28 @@ class Application {
         "/addition" bind GET to { req: Request ->
             val first = req.query("first").toString()
             val second = req.query("second").toString()
-            Response(OK).body(addition(first, second)) }
+            Response(OK).body(addition(first, second)) },
+        "/subtraction" bind GET to { req: Request ->
+            val first = req.query("first").toString()
+            val second = req.query("second").toString()
+            Response(OK).body(subtraction(first, second)) },
+        "/multiplication" bind GET to { req: Request ->
+            val first = req.query("first").toString()
+            val second = req.query("second").toString()
+            Response(OK).body(multiplication(first, second)) }
     )
+
     private val server = router.asServer(SunHttp(9000))
+
+    fun multiplication(first: String, second: String): String {
+        val totalOfMultiplication = first.toInt() * second.toInt()
+        return totalOfMultiplication.toString()
+    }
+
+    fun subtraction(first: String, second: String): String {
+        val totalOfSubtraction = first.toInt() - second.toInt()
+        return totalOfSubtraction.toString()
+    }
 
     fun addition(first: String, second: String): String {
         val totalOfAddition = first.toInt() + second.toInt()
