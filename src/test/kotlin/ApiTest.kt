@@ -58,6 +58,16 @@ class ApiTest {
         assertEquals("6", response.body.toString())
     }
 
+    @Test
+    fun `division of 5 by 3 should return 1 remainder 2`() {
+        val request = Request(GET, "http://localhost:9000/division")
+            .query("first", "5")
+            .query("second", "3")
+
+        val response = client(request)
+        assertEquals("1 remainder 2", response.body.toString())
+    }
+
     @AfterAll
     fun tearDown() {
         app.stop()
