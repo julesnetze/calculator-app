@@ -1,3 +1,4 @@
+import domain.Calculator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -5,7 +6,7 @@ class MultiplicationTest {
 
     @Test
     fun `3 times 2 should return 6`() {
-        val app = Application()
+        val app = Calculator()
 
         val result = app.multiplication("3", "2")
 
