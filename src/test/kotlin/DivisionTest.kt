@@ -6,9 +6,9 @@ class DivisionTest {
 
     @Test
     fun `5 divided by 3 should return 1 remainder 2`() {
-        val app = Calculator()
+        val calculator = Calculator()
 
-        val result = app.division("5", "3")
+        val result = calculator.division("5", "3")
 
         assertEquals("1 remainder 2", result)
     }

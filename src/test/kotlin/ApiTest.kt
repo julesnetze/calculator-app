@@ -50,7 +50,7 @@ class ApiTest {
 
     @Test
     fun `multiplication of 3 times 2 should return 6`() {
-        val request = Request(GET,"http://localhost:9000/multiplication")
+        val request = Request(GET, "http://localhost:9000/multiplication")
             .query("first", "3")
             .query("second", "2")
 
@@ -66,6 +66,17 @@ class ApiTest {
 
         val response = client(request)
         assertEquals("1 remainder 2", response.body.toString())
+    }
+
+    @Disabled
+    @Test
+    fun `addition of null and 1 should return an error`() {
+        val request = Request(GET, "http://localhost:9000/addition")
+            .query("first", null)
+            .query("second", "3")
+
+        val response = client(request)
+        assertEquals("error", response.body.toString())
     }
 
     @AfterAll
