@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 class MultiplicationTest {
 
     @Test
-    fun `3 times 2 should return 6`() {
+    fun `1 times 2 should return 2`() {
         val app = Calculator()
 
-        val result = app.multiplication("3", "2")
+        val result = app.multiplication("1", "2")
 
-        assertEquals("6", result)
+        assertEquals("2", result)
     }
 }

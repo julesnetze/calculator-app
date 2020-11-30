@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 class AdditionTest {
 
     @Test
-    fun `addition of 4 and 3 should return 7`() {
+    fun `addition of 1 and 1 should return 2`() {
         val app = Calculator()
 
-        val result = app.addition("4", "3")
+        val result = app.addition("1", "1")
 
-        assertEquals("7", result)
+        assertEquals("2", result)
     }
 }

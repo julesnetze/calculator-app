@@ -11,6 +11,7 @@ class FilterTest {
 
     lateinit var app: Application
     lateinit var handler: HttpHandler
+    private val uri = "http://localhost:9000"
 
     @BeforeAll
     fun setUp() {
@@ -20,16 +21,16 @@ class FilterTest {
 
     @Test
     fun `should return OK if first and second query parameter are valid`() {
-        val response: Response = handler(Request(GET, "http://localhost:9000")
-            .query("first", "2")
-            .query("second", "3"))
+        val response: Response = handler(Request(GET, uri)
+            .query("first", "1")
+            .query("second", "1"))
 
         assertEquals(OK,response.status)
     }
 
     @Test
-    fun `should return BAD Request if first and second query parameter are invalid`() {
-        val response: Response = handler(Request(GET, "http://localhost:9000")
+    fun `should return BAD REQUEST if first and second query parameter are invalid`() {
+        val response: Response = handler(Request(GET, uri)
             .query("first", "foo")
             .query("second", "bar"))
 
@@ -37,13 +38,13 @@ class FilterTest {
     }
 
     @Test
-    fun `should return Bad Request if first and second parameter are not present`() {
-        val response: Response = handler(Request(GET, "http://localhost:9000"))
+    fun `should return BAD REQUEST if first and second parameter are not present`() {
+        val response: Response = handler(Request(GET, uri))
 
         assertEquals(BAD_REQUEST,response.status)
     }
 
-    @AfterEach
+    @AfterAll
     fun tearDown() {
         app.stop()
     }

@@ -13,6 +13,7 @@ class ApiTest {
 
     private lateinit var app: Application
     lateinit var client: HttpHandler
+    private val baseUri = "http://localhost:9000"
 
     @BeforeAll
     fun setUp() {
@@ -23,45 +24,45 @@ class ApiTest {
 
     @Test
     fun `server should be up`() {
-        val request = Request(GET, "http://localhost:9000")
+        val request = Request(GET, baseUri)
 
         val response: Response = client(request)
         assertEquals(OK, response.status)
     }
 
     @Test
-    fun `addition of 2 and 3 should return 5`() {
-        val request = Request(GET, "http://localhost:9000/addition")
-            .query("first", "2")
-            .query("second", "3")
+    fun `addition of 1 and 1 should return 2`() {
+        val request = Request(GET, "$baseUri/addition")
+            .query("first", "1")
+            .query("second", "1")
 
         val response: Response = client(request)
-        assertEquals("5", response.body.toString())
+        assertEquals("2", response.body.toString())
     }
 
     @Test
-    fun `subtraction of 3 minus 2 should return 1`() {
-        val request = Request(GET, "http://localhost:9000/subtraction")
-            .query("first", "3")
-            .query("second", "2")
+    fun `subtraction of 1 minus 1 should return 0`() {
+        val request = Request(GET, "$baseUri/subtraction")
+            .query("first", "1")
+            .query("second", "1")
 
         val response = client(request)
-        assertEquals("1", response.body.toString())
+        assertEquals("0", response.body.toString())
     }
 
     @Test
-    fun `multiplication of 3 times 2 should return 6`() {
-        val request = Request(GET, "http://localhost:9000/multiplication")
-            .query("first", "3")
+    fun `multiplication of 1 times 2 should return 2`() {
+        val request = Request(GET, "$baseUri/multiplication")
+            .query("first", "1")
             .query("second", "2")
 
         val response = client(request)
-        assertEquals("6", response.body.toString())
+        assertEquals("2", response.body.toString())
     }
 
     @Test
     fun `division of 5 by 3 should return 1 remainder 2`() {
-        val request = Request(GET, "http://localhost:9000/division")
+        val request = Request(GET, "$baseUri/division")
             .query("first", "5")
             .query("second", "3")
 
@@ -70,8 +71,8 @@ class ApiTest {
     }
 
     @Test
-    fun `addition of null and 1 should return Bad Request`() {
-        val request = Request(GET, "http://localhost:9000/addition")
+    fun `addition of null and 1 should return BAD REQUEST`() {
+        val request = Request(GET, "$baseUri/addition")
             .query("first", null)
             .query("second", "3")
 
@@ -80,8 +81,8 @@ class ApiTest {
     }
 
     @Test
-    fun `addition with no query parameters should return Bad Request`() {
-        val request = Request(GET, "http://localhost:9000/addition")
+    fun `addition with no query parameters should return BAD REQUEST`() {
+        val request = Request(GET, "$baseUri/addition")
 
         val response = client(request)
         assertEquals(BAD_REQUEST, response.status)

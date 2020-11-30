@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 class SubtractionTest {
 
     @Test
-    fun `3 minus 2 should return 1`() {
+    fun `1 minus 1 should return 0`() {
         val calculator = Calculator()
 
-        val result = calculator.subtraction("3", "2")
+        val result = calculator.subtraction("1", "1")
 
-        assertEquals("1", result)
+        assertEquals("0", result)
     }
 }

@@ -21,27 +21,27 @@ class Application {
                 } else {
                     next(request)
                 }
-        }
+            }
     }
 
     private val router = routes(
         "/" bind GET to { Response(OK) },
         queryFilter.then(routes(
         "/addition" bind GET to { req: Request ->
-            val first = req.query("first").toString()
-            val second = req.query("second").toString()
+            val first = req.query("first")
+            val second = req.query("second")
             Response(OK).body(calculator.addition(first, second)) },
         "/subtraction" bind GET to { req: Request ->
-            val first = req.query("first").toString()
-            val second = req.query("second").toString()
+            val first = req.query("first")
+            val second = req.query("second")
             Response(OK).body(calculator.subtraction(first, second)) },
         "/multiplication" bind GET to { req: Request ->
-            val first = req.query("first").toString()
-            val second = req.query("second").toString()
+            val first = req.query("first")
+            val second = req.query("second")
             Response(OK).body(calculator.multiplication(first, second)) },
         "/division" bind GET to { req: Request ->
-            val first = req.query("first").toString()
-            val second = req.query("second").toString()
+            val first = req.query("first")
+            val second = req.query("second")
             Response(OK).body(calculator.division(first, second)) }
     )))
 
