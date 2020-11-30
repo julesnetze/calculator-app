@@ -3,6 +3,7 @@ import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
 import org.http4k.core.Response
+import org.http4k.core.Status.Companion.BAD_REQUEST
 import org.http4k.core.Status.Companion.OK
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -68,15 +69,22 @@ class ApiTest {
         assertEquals("1 remainder 2", response.body.toString())
     }
 
-    @Disabled
     @Test
-    fun `addition of null and 1 should return an error`() {
+    fun `addition of null and 1 should return Bad Request`() {
         val request = Request(GET, "http://localhost:9000/addition")
             .query("first", null)
             .query("second", "3")
 
         val response = client(request)
-        assertEquals("error", response.body.toString())
+        assertEquals(BAD_REQUEST, response.status)
+    }
+
+    @Test
+    fun `addition with no query parameters should return Bad Request`() {
+        val request = Request(GET, "http://localhost:9000/addition")
+
+        val response = client(request)
+        assertEquals(BAD_REQUEST, response.status)
     }
 
     @AfterAll
