@@ -26,7 +26,8 @@ class ApiTest {
     fun `server should be up`() {
         val request = Request(GET, baseUri)
 
-        val response: Response = client(request)
+        val response = client(request)
+
         assertEquals(OK, response.status)
     }
 
@@ -36,7 +37,8 @@ class ApiTest {
             .query("first", "1")
             .query("second", "1")
 
-        val response: Response = client(request)
+        val response = client(request)
+
         assertEquals("2", response.body.toString())
     }
 
@@ -47,6 +49,7 @@ class ApiTest {
             .query("second", "1")
 
         val response = client(request)
+
         assertEquals("0", response.body.toString())
     }
 
@@ -57,6 +60,7 @@ class ApiTest {
             .query("second", "2")
 
         val response = client(request)
+
         assertEquals("2", response.body.toString())
     }
 
@@ -67,6 +71,7 @@ class ApiTest {
             .query("second", "3")
 
         val response = client(request)
+
         assertEquals("1 remainder 2", response.body.toString())
     }
 
@@ -77,6 +82,7 @@ class ApiTest {
             .query("second", "3")
 
         val response = client(request)
+
         assertEquals(BAD_REQUEST, response.status)
     }
 
@@ -85,6 +91,7 @@ class ApiTest {
         val request = Request(GET, "$baseUri/addition")
 
         val response = client(request)
+
         assertEquals(BAD_REQUEST, response.status)
     }
 
