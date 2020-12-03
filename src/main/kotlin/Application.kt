@@ -8,18 +8,20 @@ import org.http4k.routing.routes
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
 
-val queryFilter = Filter { next -> { request ->
-    val first = request.query("first")?.toIntOrNull()
-    val second = request.query("second")?.toIntOrNull()
-    if (first == null || second == null) {
-        Response(BAD_REQUEST)
-    } else {
-        next(request)
-    }
-}}
-
 class Application {
     private val calculator = Calculator()
+
+    val queryFilter = Filter { next ->
+        { request ->
+            val first = request.query("first")?.toIntOrNull()
+            val second = request.query("second")?.toIntOrNull()
+            if (first == null || second == null) {
+                Response(BAD_REQUEST)
+            } else {
+                next(request)
+            }
+        }
+    }
 
     private val router = routes(
         "/" bind GET to { Response(OK) },

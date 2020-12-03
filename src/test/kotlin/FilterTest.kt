@@ -9,12 +9,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle
 @TestInstance(Lifecycle.PER_CLASS)
 class FilterTest {
 
+    lateinit var app: Application
     lateinit var handler: HttpHandler
     private val uri = "http://localhost:9000"
 
     @BeforeAll
     fun setUp() {
-        handler = queryFilter.then { Response(OK) }
+        app = Application()
+        handler = app.queryFilter.then { Response(OK) }
     }
 
     @Test
@@ -46,5 +48,10 @@ class FilterTest {
         val response = handler(request)
 
         assertEquals(BAD_REQUEST,response.status)
+    }
+
+    @AfterEach
+    internal fun tearDown() {
+        app.stop()
     }
 }
